@@ -1,19 +1,24 @@
-# 👗 Wardrobe.ai — AI-Powered Digital Wardrobe & Styling Platform
+# Atelier — AI-Powered Digital Wardrobe & Styling Platform
 
-A full-stack AI-powered fashion platform that helps users organize their wardrobe, generate personalized outfit recommendations, and gain insights into their style habits.
+A full-stack fashion platform that helps users organize their wardrobe, generate personalized outfit recommendations, and gain insights into their style habits.
 
-## 🚀 Live Demo
-[View Live →](https://ai-wardrobe-gilt.vercel.app)
+## Live Demo
 
-## ✨ Features
+[View Live](https://ai-wardrobe-gilt.vercel.app)
 
-- **Digital Wardrobe** — Upload and organize clothing items with image storage
-- **AI Outfit Suggestions** — Get personalized outfit recommendations based on occasion and season
-- **Wardrobe Insights** — Analyze your style patterns, color usage, and wardrobe gaps
-- **Authentication** — Secure signup/login with JWT tokens
-- **Responsive UI** — Clean, modern interface built with React and Tailwind CSS
+---
 
-## 🛠️ Tech Stack
+## Features
+
+- Digital Wardrobe — Upload and organize clothing items with cloud image storage
+- Outfit Curation — AI-generated outfit recommendations based on occasion and season
+- Style Insights — Analyze color usage, category breakdown, and wardrobe gaps
+- Authentication — Secure signup and login with JWT tokens
+- Responsive UI — Clean, minimal interface built with React and Tailwind CSS
+
+---
+
+## Tech Stack
 
 **Frontend**
 - React.js + Vite
@@ -25,47 +30,51 @@ A full-stack AI-powered fashion platform that helps users organize their wardrob
 - Node.js + Express.js
 - MongoDB + Mongoose
 - JWT Authentication
-- Bcrypt password hashing
+- Bcrypt
 
-**Cloud Services**
-- Cloudinary (image storage)
-- MongoDB Atlas (database)
+**Cloud**
+- Cloudinary — image storage
+- MongoDB Atlas — database hosting
+- Render — backend deployment
+- Vercel — frontend deployment
 
-## 📁 Project Structure
-ai-wardrobe/
-├── frontend/          # React application
-│   ├── src/
-│   │   ├── components/    # Navbar, Hero, Features
-│   │   ├── pages/         # Wardrobe, Outfit, Insights, Login, Signup
-│   │   └── api.js         # API configuration
-└── backend/           # Node.js server
-├── controllers/   # Auth, Clothing, Outfit, Insights logic
-├── models/        # User, Clothing schemas
-├── routes/        # API routes
-└── middleware/    # JWT authentication
+---
 
-## 🏃 Getting Started
+## Project Structure
+atelier/
+├── frontend/
+│   └── src/
+│       ├── components/
+│       ├── pages/
+│       └── api.js
+└── backend/
+├── controllers/
+├── models/
+├── routes/
+└── middleware/
 
-### Prerequisites
+---
+
+## Getting Started
+
+**Prerequisites**
 - Node.js
 - MongoDB Atlas account
 - Cloudinary account
 
-### Installation
-
-1. Clone the repository
+**Clone the repository**
 ```bash
 git clone https://github.com/khushi-chaudharyy7/ai-wardrobe.git
 cd ai-wardrobe
 ```
 
-2. Setup Backend
+**Backend setup**
 ```bash
 cd backend
 npm install
 ```
 
-Create `.env` file in backend:
+Create a `.env` file in the backend directory:
 MONGO_URI=your_mongodb_uri
 PORT=8000
 JWT_SECRET=your_jwt_secret
@@ -78,12 +87,15 @@ CLOUDINARY_UPLOAD_PRESET=your_upload_preset
 npm run dev
 ```
 
-3. Setup Frontend
+**Frontend setup**
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
 
-## 👩‍💻 Author
+---
+
+## Author
+
 Khushi Chaudhary
