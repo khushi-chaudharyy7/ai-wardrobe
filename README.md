@@ -3,7 +3,7 @@
 A full-stack AI-powered fashion platform that helps users organize their wardrobe, generate personalized outfit recommendations, and gain insights into their style habits.
 
 ## 🚀 Live Demo
-Coming soon...
+[View Live →](https://ai-wardrobe-gilt.vercel.app)
 
 ## ✨ Features
 
