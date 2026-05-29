@@ -1,7 +1,7 @@
-import Navbar from '../components/Navbar'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { uploadClothing, getClothing, deleteClothing } from '../api'
+import Navbar from '../components/Navbar'
 
 function Wardrobe() {
   const navigate = useNavigate()
@@ -22,10 +22,7 @@ function Wardrobe() {
   const [preview, setPreview] = useState(null)
 
   useEffect(() => {
-    if (!user) {
-      navigate('/login')
-      return
-    }
+    if (!user) { navigate('/login'); return }
     fetchClothes()
   }, [])
 
@@ -57,7 +54,6 @@ function Wardrobe() {
       formData.append('occasion', form.occasion)
       formData.append('brand', form.brand)
       formData.append('notes', form.notes)
-
       await uploadClothing(formData)
       setShowForm(false)
       setImage(null)
@@ -81,183 +77,179 @@ function Wardrobe() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Navbar */}
+    <div className="min-h-screen" style={{ backgroundColor: '#FAF7F2' }}>
       <Navbar showNav={true} />
 
       <div className="max-w-6xl mx-auto px-8 py-12">
-      <div className="flex justify-between items-center mb-8">
-        <div>
-            <h2 className="text-3xl font-bold text-gray-800">My Wardrobe</h2>
-            <p className="text-gray-500">{clothes.length} items</p>
-        </div>
-        <div className="flex gap-3">
-            <button
-              onClick={() => navigate('/insights')}
-              className="border-2 border-pink-500 text-pink-500 px-6 py-3 rounded-xl hover:bg-pink-50 font-medium"
-            >
-              📊 Insights
-            </button>
-            <button
-              onClick={() => navigate('/outfit')}
-              className="border-2 border-purple-600 text-purple-600 px-6 py-3 rounded-xl hover:bg-purple-50 font-medium"
-            >
-              ✨ Get Outfit
-            </button>
+        {/* Header */}
+        <div className="flex justify-between items-end mb-12 border-b border-stone-200 pb-6">
+          <div>
+            <p className="text-xs tracking-[0.3em] uppercase text-stone-400 mb-2">Your Collection</p>
+            <h2 className="text-4xl font-bold text-stone-900" style={{ fontFamily: 'Playfair Display, serif' }}>
+              My Wardrobe
+            </h2>
+          </div>
+          <div className="flex gap-3 items-center">
+            <p className="text-stone-400 text-sm">{clothes.length} pieces</p>
             <button
               onClick={() => setShowForm(true)}
-              className="bg-purple-600 text-white px-6 py-3 rounded-xl hover:bg-purple-700 font-medium"
+              className="text-white px-6 py-3 text-xs tracking-widest uppercase font-medium hover:opacity-90 transition"
+              style={{ backgroundColor: '#8B0000' }}
             >
-              + Upload Clothing
+              + Add Piece
             </button>
+          </div>
         </div>
-      </div>
 
         {/* Upload Form Modal */}
         {showForm && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white rounded-2xl p-8 w-full max-w-lg max-h-[90vh] overflow-y-auto">
-              <div className="flex justify-between items-center mb-6">
-                <h3 className="text-2xl font-bold text-gray-800">Upload Clothing</h3>
-                <button onClick={() => setShowForm(false)} className="text-gray-400 hover:text-gray-600 text-2xl">✕</button>
+          <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
+            <div className="bg-white w-full max-w-lg max-h-[90vh] overflow-y-auto">
+              <div className="flex justify-between items-center px-8 py-6 border-b border-stone-200">
+                <h3 className="text-xl font-bold text-stone-900" style={{ fontFamily: 'Playfair Display, serif' }}>
+                  Add New Piece
+                </h3>
+                <button onClick={() => setShowForm(false)} className="text-stone-400 hover:text-stone-900 text-xl">✕</button>
               </div>
 
-              {/* Image Upload */}
-              <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 mb-2">Photo</label>
-                <label className="w-full flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-xl py-8 cursor-pointer hover:border-purple-400 hover:bg-purple-50 transition">
-                  <div className="text-4xl mb-2">📸</div>
-                  <p className="text-gray-500 font-medium">Click to upload photo</p>
-                  <p className="text-gray-400 text-sm mt-1">PNG, JPG supported</p>
-                  <input type="file" accept="image/*" onChange={handleImageChange} className="hidden" />
-                </label>
-                {preview && (
-                  <img src={preview} alt="preview" className="mt-3 w-full h-48 object-cover rounded-xl" />
-                )}
-                
-              </div>
+              <div className="px-8 py-6 flex flex-col gap-6">
+                {/* Image Upload */}
+                <div>
+                  <label className="text-xs tracking-widest uppercase text-stone-500">Photo</label>
+                  <label className="mt-2 w-full flex flex-col items-center justify-center border border-stone-200 py-8 cursor-pointer hover:border-stone-900 transition">
+                    <p className="text-stone-400 text-sm">Click to upload photo</p>
+                    <p className="text-stone-300 text-xs mt-1">PNG, JPG supported</p>
+                    <input type="file" accept="image/*" onChange={handleImageChange} className="hidden" />
+                  </label>
+                  {preview && (
+                    <img src={preview} alt="preview" className="mt-3 w-full h-48 object-cover" />
+                  )}
+                </div>
 
-              {/* Category */}
-              <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 mb-2">Category</label>
-                <select
-                  value={form.category}
-                  onChange={(e) => setForm({ ...form, category: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400"
+                {/* Category */}
+                <div>
+                  <label className="text-xs tracking-widest uppercase text-stone-500">Category</label>
+                  <select
+                    value={form.category}
+                    onChange={(e) => setForm({ ...form, category: e.target.value })}
+                    className="w-full mt-2 px-0 py-3 border-b border-stone-300 focus:outline-none focus:border-stone-900 bg-transparent text-stone-900"
+                  >
+                    <option value="tops">Tops</option>
+                    <option value="bottoms">Bottoms</option>
+                    <option value="shoes">Shoes</option>
+                    <option value="accessories">Accessories</option>
+                    <option value="dresses">Dresses</option>
+                    <option value="jackets">Jackets</option>
+                  </select>
+                </div>
+
+                {/* Color */}
+                <div>
+                  <label className="text-xs tracking-widest uppercase text-stone-500">Color</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. black, cream, burgundy"
+                    value={form.color}
+                    onChange={(e) => setForm({ ...form, color: e.target.value })}
+                    className="w-full mt-2 px-0 py-3 border-b border-stone-300 focus:outline-none focus:border-stone-900 bg-transparent text-stone-900"
+                  />
+                </div>
+
+                {/* Season */}
+                <div>
+                  <label className="text-xs tracking-widest uppercase text-stone-500">Season</label>
+                  <select
+                    value={form.season}
+                    onChange={(e) => setForm({ ...form, season: e.target.value })}
+                    className="w-full mt-2 px-0 py-3 border-b border-stone-300 focus:outline-none focus:border-stone-900 bg-transparent text-stone-900"
+                  >
+                    <option value="all">All Seasons</option>
+                    <option value="summer">Summer</option>
+                    <option value="winter">Winter</option>
+                    <option value="spring">Spring</option>
+                    <option value="autumn">Autumn</option>
+                  </select>
+                </div>
+
+                {/* Occasion */}
+                <div>
+                  <label className="text-xs tracking-widest uppercase text-stone-500">Occasion</label>
+                  <select
+                    value={form.occasion}
+                    onChange={(e) => setForm({ ...form, occasion: e.target.value })}
+                    className="w-full mt-2 px-0 py-3 border-b border-stone-300 focus:outline-none focus:border-stone-900 bg-transparent text-stone-900"
+                  >
+                    <option value="any">Any</option>
+                    <option value="casual">Casual</option>
+                    <option value="formal">Formal</option>
+                    <option value="party">Party</option>
+                    <option value="sports">Sports</option>
+                  </select>
+                </div>
+
+                {/* Brand */}
+                <div>
+                  <label className="text-xs tracking-widest uppercase text-stone-500">Brand (optional)</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. Zara, H&M"
+                    value={form.brand}
+                    onChange={(e) => setForm({ ...form, brand: e.target.value })}
+                    className="w-full mt-2 px-0 py-3 border-b border-stone-300 focus:outline-none focus:border-stone-900 bg-transparent text-stone-900"
+                  />
+                </div>
+
+                <button
+                  onClick={handleSubmit}
+                  disabled={loading}
+                  className="w-full text-white py-4 text-xs tracking-widest uppercase font-medium hover:opacity-90 transition disabled:opacity-50"
+                  style={{ backgroundColor: '#8B0000' }}
                 >
-                  <option value="tops">Tops</option>
-                  <option value="bottoms">Bottoms</option>
-                  <option value="shoes">Shoes</option>
-                  <option value="accessories">Accessories</option>
-                  <option value="dresses">Dresses</option>
-                  <option value="jackets">Jackets</option>
-                </select>
+                  {loading ? 'Uploading...' : 'Add to Wardrobe'}
+                </button>
               </div>
-
-              {/* Color */}
-              <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 mb-2">Color</label>
-                <input
-                  type="text"
-                  placeholder="e.g. blue, red, black"
-                  value={form.color}
-                  onChange={(e) => setForm({ ...form, color: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400"
-                />
-              </div>
-
-              {/* Season */}
-              <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 mb-2">Season</label>
-                <select
-                  value={form.season}
-                  onChange={(e) => setForm({ ...form, season: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400"
-                >
-                  <option value="all">All Seasons</option>
-                  <option value="summer">Summer</option>
-                  <option value="winter">Winter</option>
-                  <option value="spring">Spring</option>
-                  <option value="autumn">Autumn</option>
-                </select>
-              </div>
-
-              {/* Occasion */}
-              <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 mb-2">Occasion</label>
-                <select
-                  value={form.occasion}
-                  onChange={(e) => setForm({ ...form, occasion: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400"
-                >
-                  <option value="any">Any</option>
-                  <option value="casual">Casual</option>
-                  <option value="formal">Formal</option>
-                  <option value="party">Party</option>
-                  <option value="sports">Sports</option>
-                </select>
-              </div>
-
-              {/* Brand */}
-              <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 mb-2">Brand (optional)</label>
-                <input
-                  type="text"
-                  placeholder="e.g. Zara, H&M"
-                  value={form.brand}
-                  onChange={(e) => setForm({ ...form, brand: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400"
-                />
-              </div>
-
-              <button
-                onClick={handleSubmit}
-                disabled={loading}
-                className="w-full bg-purple-600 text-white py-3 rounded-xl hover:bg-purple-700 font-medium disabled:opacity-50"
-              >
-                {loading ? 'Uploading...' : 'Upload'}
-              </button>
             </div>
           </div>
         )}
 
         {/* Clothes Grid */}
         {fetching ? (
-          <div className="text-center text-gray-400 py-20">Loading your wardrobe...</div>
+          <div className="text-center text-stone-400 py-20 tracking-widest uppercase text-xs">
+            Loading your collection...
+          </div>
         ) : clothes.length === 0 ? (
-          <div className="bg-white rounded-2xl p-12 shadow-sm flex flex-col items-center justify-center border-2 border-dashed border-gray-200">
-            <div className="text-6xl mb-4">👗</div>
-            <h3 className="text-xl font-bold text-gray-700 mb-2">Your wardrobe is empty</h3>
-            <p className="text-gray-400 mb-6">Start by uploading your first clothing item</p>
+          <div className="flex flex-col items-center justify-center py-32 border border-dashed border-stone-300">
+            <p className="text-stone-400 text-sm tracking-widest uppercase mb-6">Your wardrobe is empty</p>
             <button
               onClick={() => setShowForm(true)}
-              className="bg-purple-600 text-white px-6 py-3 rounded-xl hover:bg-purple-700 font-medium"
+              className="text-white px-8 py-3 text-xs tracking-widest uppercase font-medium hover:opacity-90 transition"
+              style={{ backgroundColor: '#8B0000' }}
             >
-              + Upload Clothing
+              Add First Piece
             </button>
           </div>
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {clothes.map((item) => (
-              <div key={item._id} className="bg-white rounded-2xl shadow-sm overflow-hidden hover:shadow-md transition">
-              <img src={item.imageUrl} alt={item.category} className="w-full h-48 object-cover" />
-              <div className="p-4">
-                <p className="font-semibold text-gray-800 capitalize">{item.category}</p>
-                <p className="text-sm text-gray-400 capitalize">{item.color} • {item.occasion}</p>
-                <button
-                  onClick={() => handleDelete(item._id)}
-                  className="mt-3 text-red-400 hover:text-red-600 text-sm"
-                >
-                  Remove
-                </button>
+              <div key={item._id} className="group relative bg-white overflow-hidden">
+                <img src={item.imageUrl} alt={item.category} className="w-full h-64 object-cover" />
+                <div className="p-4">
+                  <p className="font-medium text-stone-900 capitalize text-sm tracking-wide">{item.category}</p>
+                  <p className="text-xs text-stone-400 capitalize mt-1">{item.color} — {item.occasion}</p>
+                  <button
+                    onClick={() => handleDelete(item._id)}
+                    className="mt-3 text-xs text-stone-300 hover:text-red-800 tracking-widest uppercase transition"
+                  >
+                    Remove
+                  </button>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
-      )}
+            ))}
+          </div>
+        )}
+      </div>
     </div>
-  </div>
-)
+  )
 }
 
 export default Wardrobe

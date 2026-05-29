@@ -10,26 +10,27 @@ function Navbar({ showNav = false }) {
     navigate('/')
   }
 
-  // Public navbar (landing page)
   if (!showNav) {
     return (
-      <nav className="bg-white shadow-sm px-8 py-4 flex justify-between items-center">
+      <nav className="bg-white px-8 py-5 flex justify-between items-center border-b border-stone-200">
         <h1
-          className="text-2xl font-bold text-purple-600 cursor-pointer"
+          className="text-2xl font-bold cursor-pointer tracking-widest uppercase"
+          style={{ fontFamily: 'Playfair Display, serif', color: '#8B0000' }}
           onClick={() => navigate('/')}
         >
-          👗 Wardrobe.ai
+          Atelier
         </h1>
-        <div className="flex gap-4">
+        <div className="flex gap-4 items-center">
           <button
             onClick={() => navigate('/login')}
-            className="text-gray-600 hover:text-purple-600 font-medium"
+            className="text-stone-600 hover:text-stone-900 font-medium text-sm tracking-wide"
           >
             Login
           </button>
           <button
             onClick={() => navigate('/signup')}
-            className="bg-purple-600 text-white px-4 py-2 rounded-full hover:bg-purple-700 font-medium"
+            className="text-white px-5 py-2 text-sm tracking-wide font-medium"
+            style={{ backgroundColor: '#8B0000' }}
           >
             Get Started
           </button>
@@ -38,31 +39,31 @@ function Navbar({ showNav = false }) {
     )
   }
 
-  // App navbar (after login)
   const navItems = [
-    { label: '👗 Wardrobe', path: '/wardrobe' },
-    { label: '✨ Outfit', path: '/outfit' },
-    { label: '📊 Insights', path: '/insights' },
+    { label: 'Wardrobe', path: '/wardrobe' },
+    { label: 'Outfit', path: '/outfit' },
+    { label: 'Insights', path: '/insights' },
   ]
 
   return (
-    <nav className="bg-white shadow-sm px-8 py-4 flex justify-between items-center">
+    <nav className="bg-white px-8 py-5 flex justify-between items-center border-b border-stone-200">
       <h1
-        className="text-2xl font-bold text-purple-600 cursor-pointer"
+        className="text-2xl font-bold cursor-pointer tracking-widest uppercase"
+        style={{ fontFamily: 'Playfair Display, serif', color: '#8B0000' }}
         onClick={() => navigate('/wardrobe')}
       >
-        👗 Wardrobe.ai
+        Atelier
       </h1>
 
-      <div className="flex items-center gap-6">
+      <div className="flex items-center gap-8">
         {navItems.map((item) => (
           <button
             key={item.path}
             onClick={() => navigate(item.path)}
-            className={`font-medium transition ${
+            className={`text-sm tracking-widest uppercase font-medium transition ${
               location.pathname === item.path
-                ? 'text-purple-600 border-b-2 border-purple-600'
-                : 'text-gray-500 hover:text-purple-600'
+                ? 'text-stone-900 border-b-2 border-stone-900'
+                : 'text-stone-400 hover:text-stone-900'
             }`}
           >
             {item.label}
@@ -71,10 +72,10 @@ function Navbar({ showNav = false }) {
       </div>
 
       <div className="flex items-center gap-4">
-        <span className="text-gray-600">Hi, {user?.name}! 👋</span>
+        <span className="text-stone-500 text-sm">Hi, {user?.name}</span>
         <button
           onClick={handleLogout}
-          className="text-red-400 hover:text-red-600 font-medium"
+          className="text-sm tracking-wide text-stone-400 hover:text-red-800"
         >
           Logout
         </button>

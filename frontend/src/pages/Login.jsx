@@ -27,59 +27,75 @@ function Login() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-      <div className="bg-white p-10 rounded-2xl shadow-sm w-full max-w-md">
-        <h2 className="text-3xl font-bold text-gray-800 mb-2">Welcome back</h2>
-        <p className="text-gray-500 mb-8">Login to your wardrobe</p>
+    <div className="min-h-screen flex" style={{ backgroundColor: '#FAF7F2' }}>
+      {/* Left Side */}
+      <div className="hidden md:flex w-1/2 flex-col justify-center px-16" style={{ backgroundColor: '#1A1A1A' }}>
+        <h1 className="text-5xl font-bold text-white mb-4 leading-tight" style={{ fontFamily: 'Playfair Display, serif' }}>
+          Welcome <br />back.
+        </h1>
+        <p className="text-stone-400 text-sm leading-relaxed max-w-xs">
+          Your wardrobe has been waiting. Step back into your personal styling studio.
+        </p>
+      </div>
 
-        {error && (
-          <div className="bg-red-50 text-red-500 px-4 py-3 rounded-xl mb-4 text-sm">
-            {error}
-          </div>
-        )}
+      {/* Right Side */}
+      <div className="w-full md:w-1/2 flex items-center justify-center px-8">
+        <div className="w-full max-w-md">
+          <h2 className="text-3xl font-bold text-stone-900 mb-2" style={{ fontFamily: 'Playfair Display, serif' }}>
+            Sign in
+          </h2>
+          <p className="text-stone-400 text-sm mb-10">Enter your credentials to continue</p>
 
-        <div className="flex flex-col gap-4">
-          <div>
-            <label className="text-sm font-medium text-gray-700">Email</label>
-            <input
-              type="email"
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              placeholder="you@example.com"
-              className="w-full mt-1 px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400"
-            />
-          </div>
+          {error && (
+            <div className="bg-red-50 text-red-800 px-4 py-3 mb-6 text-sm border-l-4 border-red-800">
+              {error}
+            </div>
+          )}
 
-          <div>
-            <label className="text-sm font-medium text-gray-700">Password</label>
-            <input
-              type="password"
-              name="password"
-              value={form.password}
-              onChange={handleChange}
-              placeholder="••••••••"
-              className="w-full mt-1 px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400"
-            />
-          </div>
+          <div className="flex flex-col gap-5">
+            <div>
+              <label className="text-xs tracking-widest uppercase text-stone-500">Email</label>
+              <input
+                type="email"
+                name="email"
+                value={form.email}
+                onChange={handleChange}
+                placeholder="you@example.com"
+                className="w-full mt-2 px-0 py-3 border-b border-stone-300 focus:outline-none focus:border-stone-900 bg-transparent text-stone-900"
+              />
+            </div>
 
-          <button
-            onClick={handleSubmit}
-            disabled={loading}
-            className="bg-purple-600 text-white py-3 rounded-xl hover:bg-purple-700 font-medium mt-2 disabled:opacity-50"
-          >
-            {loading ? 'Logging in...' : 'Login'}
-          </button>
+            <div>
+              <label className="text-xs tracking-widest uppercase text-stone-500">Password</label>
+              <input
+                type="password"
+                name="password"
+                value={form.password}
+                onChange={handleChange}
+                placeholder="••••••••"
+                className="w-full mt-2 px-0 py-3 border-b border-stone-300 focus:outline-none focus:border-stone-900 bg-transparent text-stone-900"
+              />
+            </div>
 
-          <p className="text-center text-gray-500 text-sm">
-            Don't have an account?{" "}
-            <span
-              onClick={() => navigate('/signup')}
-              className="text-purple-600 font-medium cursor-pointer hover:underline"
+            <button
+              onClick={handleSubmit}
+              disabled={loading}
+              className="w-full text-white py-4 text-sm tracking-widest uppercase font-medium mt-4 hover:opacity-90 transition disabled:opacity-50"
+              style={{ backgroundColor: '#8B0000' }}
             >
-              Sign up
-            </span>
-          </p>
+              {loading ? 'Signing in...' : 'Sign In'}
+            </button>
+
+            <p className="text-center text-stone-400 text-sm">
+              Don't have an account?{" "}
+              <span
+                onClick={() => navigate('/signup')}
+                className="text-stone-900 font-medium cursor-pointer hover:underline"
+              >
+                Create one
+              </span>
+            </p>
+          </div>
         </div>
       </div>
     </div>

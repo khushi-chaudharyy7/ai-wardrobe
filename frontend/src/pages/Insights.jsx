@@ -1,11 +1,10 @@
-import Navbar from '../components/Navbar'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getInsights } from '../api'
+import Navbar from '../components/Navbar'
 
 function Insights() {
   const navigate = useNavigate()
-  const user = JSON.parse(localStorage.getItem('user'))
   const [insights, setInsights] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
@@ -25,64 +24,79 @@ function Insights() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Navbar */}
+    <div className="min-h-screen" style={{ backgroundColor: '#FAF7F2' }}>
       <Navbar showNav={true} />
 
       <div className="max-w-4xl mx-auto px-8 py-12">
-        <h2 className="text-3xl font-bold text-gray-800 mb-2">Wardrobe Insights</h2>
-        <p className="text-gray-500 mb-8">Understand your style and wardrobe habits</p>
+        {/* Header */}
+        <div className="border-b border-stone-200 pb-6 mb-12">
+          <p className="text-xs tracking-[0.3em] uppercase text-stone-400 mb-2">Analytics</p>
+          <h2 className="text-4xl font-bold text-stone-900" style={{ fontFamily: 'Playfair Display, serif' }}>
+            Style Insights
+          </h2>
+        </div>
 
         {loading && (
-          <div className="text-center text-gray-400 py-20">Analyzing your wardrobe...</div>
+          <div className="text-center text-stone-400 py-20 tracking-widest uppercase text-xs">
+            Analyzing your wardrobe...
+          </div>
         )}
 
         {error && (
-          <div className="bg-red-50 text-red-500 px-4 py-3 rounded-xl mb-6 text-sm">
+          <div className="border-l-4 border-red-800 bg-red-50 text-red-800 px-4 py-3 mb-6 text-sm">
             {error}
           </div>
         )}
 
         {insights && (
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-8">
 
             {/* Total Items */}
-            <div className="bg-white rounded-2xl p-6 shadow-sm">
-              <h3 className="text-lg font-bold text-gray-700 mb-1">Total Items</h3>
-              <p className="text-5xl font-bold text-purple-600">{insights.totalItems}</p>
-              <p className="text-gray-400 mt-1">items in your wardrobe</p>
+            <div className="bg-white p-8 flex justify-between items-center">
+              <div>
+                <p className="text-xs tracking-[0.3em] uppercase text-stone-400 mb-2">Total Pieces</p>
+                <p className="text-6xl font-bold text-stone-900" style={{ fontFamily: 'Playfair Display, serif' }}>
+                  {insights.totalItems}
+                </p>
+              </div>
+              <div className="text-right">
+                <p className="text-xs tracking-widest uppercase text-stone-400">in your collection</p>
+              </div>
             </div>
 
-            {/* AI Insights Messages */}
-            <div className="bg-white rounded-2xl p-6 shadow-sm">
-              <h3 className="text-lg font-bold text-gray-700 mb-4">✨ Style Insights</h3>
+            {/* Style Insights Messages */}
+            <div className="bg-white p-8">
+              <p className="text-xs tracking-[0.3em] uppercase text-stone-400 mb-6">Style Analysis</p>
               {insights.messages.length > 0 ? (
-                <div className="flex flex-col gap-3">
+                <div className="flex flex-col gap-4">
                   {insights.messages.map((msg, i) => (
-                    <div key={i} className="bg-purple-50 text-purple-700 px-4 py-3 rounded-xl text-sm">
-                      {msg}
+                    <div key={i} className="flex gap-4 items-start border-l-2 pl-4" style={{ borderColor: '#8B0000' }}>
+                      <p className="text-stone-600 text-sm leading-relaxed">{msg}</p>
                     </div>
                   ))}
                 </div>
               ) : (
-                <p className="text-gray-400">Upload more items for insights!</p>
+                <p className="text-stone-400 text-sm">Upload more items for insights!</p>
               )}
             </div>
 
             {/* Category Breakdown */}
-            <div className="bg-white rounded-2xl p-6 shadow-sm">
-              <h3 className="text-lg font-bold text-gray-700 mb-4">Category Breakdown</h3>
-              <div className="flex flex-col gap-3">
+            <div className="bg-white p-8">
+              <p className="text-xs tracking-[0.3em] uppercase text-stone-400 mb-6">Category Breakdown</p>
+              <div className="flex flex-col gap-5">
                 {Object.entries(insights.categoryCount).map(([category, count]) => (
                   <div key={category}>
-                    <div className="flex justify-between mb-1">
-                      <span className="text-gray-600 capitalize">{category}</span>
-                      <span className="text-gray-400 text-sm">{count} items</span>
+                    <div className="flex justify-between mb-2">
+                      <span className="text-sm text-stone-700 capitalize tracking-wide">{category}</span>
+                      <span className="text-xs text-stone-400">{count} pieces</span>
                     </div>
-                    <div className="w-full bg-gray-100 rounded-full h-2">
+                    <div className="w-full bg-stone-100 h-1">
                       <div
-                        className="bg-purple-500 h-2 rounded-full"
-                        style={{ width: `${(count / insights.totalItems) * 100}%` }}
+                        className="h-1 transition-all"
+                        style={{
+                          width: `${(count / insights.totalItems) * 100}%`,
+                          backgroundColor: '#8B0000'
+                        }}
                       />
                     </div>
                   </div>
@@ -91,24 +105,24 @@ function Insights() {
             </div>
 
             {/* Color Breakdown */}
-            <div className="bg-white rounded-2xl p-6 shadow-sm">
-              <h3 className="text-lg font-bold text-gray-700 mb-4">Colors in Your Wardrobe</h3>
+            <div className="bg-white p-8">
+              <p className="text-xs tracking-[0.3em] uppercase text-stone-400 mb-6">Color Palette</p>
               <div className="flex flex-wrap gap-3">
                 {Object.entries(insights.colorCount).map(([color, count]) => (
-                  <div key={color} className="bg-gray-100 px-4 py-2 rounded-full text-sm text-gray-700">
-                    {color} <span className="text-purple-600 font-bold">×{count}</span>
+                  <div key={color} className="border border-stone-200 px-4 py-2 text-sm text-stone-700">
+                    {color} <span className="text-stone-400">×{count}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Missing Categories */}
+            {/* Wardrobe Gaps */}
             {insights.missingCategories.length > 0 && (
-              <div className="bg-white rounded-2xl p-6 shadow-sm">
-                <h3 className="text-lg font-bold text-gray-700 mb-4">⚠️ Wardrobe Gaps</h3>
+              <div className="bg-white p-8">
+                <p className="text-xs tracking-[0.3em] uppercase text-stone-400 mb-6">Wardrobe Gaps</p>
                 <div className="flex flex-wrap gap-3">
                   {insights.missingCategories.map((cat) => (
-                    <div key={cat} className="bg-red-50 text-red-500 px-4 py-2 rounded-full text-sm capitalize">
+                    <div key={cat} className="border border-red-200 px-4 py-2 text-sm text-red-800 capitalize">
                       Missing: {cat}
                     </div>
                   ))}
@@ -117,19 +131,22 @@ function Insights() {
             )}
 
             {/* Occasion Breakdown */}
-            <div className="bg-white rounded-2xl p-6 shadow-sm">
-              <h3 className="text-lg font-bold text-gray-700 mb-4">Occasion Breakdown</h3>
-              <div className="flex flex-col gap-3">
+            <div className="bg-white p-8">
+              <p className="text-xs tracking-[0.3em] uppercase text-stone-400 mb-6">Occasion Breakdown</p>
+              <div className="flex flex-col gap-5">
                 {Object.entries(insights.occasionCount).map(([occasion, count]) => (
                   <div key={occasion}>
-                    <div className="flex justify-between mb-1">
-                      <span className="text-gray-600 capitalize">{occasion}</span>
-                      <span className="text-gray-400 text-sm">{count} items</span>
+                    <div className="flex justify-between mb-2">
+                      <span className="text-sm text-stone-700 capitalize tracking-wide">{occasion}</span>
+                      <span className="text-xs text-stone-400">{count} pieces</span>
                     </div>
-                    <div className="w-full bg-gray-100 rounded-full h-2">
+                    <div className="w-full bg-stone-100 h-1">
                       <div
-                        className="bg-pink-400 h-2 rounded-full"
-                        style={{ width: `${(count / insights.totalItems) * 100}%` }}
+                        className="h-1 transition-all"
+                        style={{
+                          width: `${(count / insights.totalItems) * 100}%`,
+                          backgroundColor: '#3D1C02'
+                        }}
                       />
                     </div>
                   </div>

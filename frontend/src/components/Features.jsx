@@ -1,38 +1,36 @@
 const features = [
-    {
-      icon: "👗",
-      title: "Digital Wardrobe",
-      description: "Upload all your clothes and organize them in one place. Never forget what you own again."
-    },
-    {
-      icon: "✨",
-      title: "AI Outfit Suggestions",
-      description: "Get personalized outfit recommendations based on occasion, weather, and your style."
-    },
-    {
-      icon: "📊",
-      title: "Wardrobe Insights",
-      description: "Discover which clothes you overuse, what's missing, and how to shop smarter."
-    }
-  ]
-  
-  function Features() {
-    return (
-      <div className="px-8 py-16 max-w-6xl mx-auto">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">
-          Everything you need to dress better
-        </h2>
-        <div className="grid grid-cols-3 gap-8">
-          {features.map((feature, index) => (
-            <div key={index} className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition">
-              <div className="text-4xl mb-4">{feature.icon}</div>
-              <h3 className="text-xl font-bold text-gray-800 mb-2">{feature.title}</h3>
-              <p className="text-gray-500">{feature.description}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    )
+  {
+    title: "Digital Wardrobe",
+    description: "Upload and organize every piece you own. Your entire closet, beautifully catalogued in one place."
+  },
+  {
+    title: "AI Outfit Curation",
+    description: "Get personalized outfit recommendations based on occasion, season, and your unique style."
+  },
+  {
+    title: "Style Insights",
+    description: "Discover patterns in your wardrobe. Understand what you wear, what you don't, and what's missing."
   }
-  
-  export default Features
+]
+
+function Features() {
+  return (
+    <div className="px-8 py-24 max-w-6xl mx-auto">
+      <p className="text-xs tracking-[0.3em] uppercase text-stone-400 text-center mb-4">What We Offer</p>
+      <h2 className="text-4xl font-bold text-center text-stone-900 mb-16" style={{ fontFamily: 'Playfair Display, serif' }}>
+        Everything your wardrobe needs.
+      </h2>
+      <div className="grid grid-cols-3 gap-12">
+        {features.map((feature, index) => (
+          <div key={index} className="flex flex-col border-t-2 border-stone-900 pt-6">
+            <p className="text-xs tracking-[0.2em] uppercase text-stone-400 mb-3">0{index + 1}</p>
+            <h3 className="text-xl font-bold text-stone-900 mb-3" style={{ fontFamily: 'Playfair Display, serif' }}>{feature.title}</h3>
+            <p className="text-stone-500 leading-relaxed text-sm">{feature.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+export default Features
