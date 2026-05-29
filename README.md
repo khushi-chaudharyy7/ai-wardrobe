@@ -64,7 +64,7 @@ atelier/
 
 **Clone the repository**
 ```bash
-git clone https://github.com/khushi-chaudharyy7/ai-wardrobe.git
+git clone https://github.com/khushi-chaudharyy7/atelier.git
 cd ai-wardrobe
 ```
 
