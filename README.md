@@ -4,7 +4,7 @@ A full-stack fashion platform that helps users organize their wardrobe, generate
 
 ## Live Demo
 
-[View Live](https://ai-wardrobe-gilt.vercel.app)
+[View Live](https://my-atelier.vercel.app)
 
 ---
 
